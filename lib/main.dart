@@ -10,132 +10,214 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My First',
+      debugShowCheckedModeBanner: false,
+      title: "Profile Page",
       home: Scaffold(
+        backgroundColor: const Color(0xFFF9FBFC),
         appBar: AppBar(
-          backgroundColor: Color(0xFFE5E7EB),
+          backgroundColor: const Color(0xFFE5E7EB),
           title: const Text(
-            'Contact',
+            'Profile',
             style: TextStyle(
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings, color: Colors.black),
+              onPressed: () {},
+            ),
+          ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    width: 250,
-                    height: 250,
-                    decoration: BoxDecoration(
-                      color: Colors.amberAccent.shade100,
-                      borderRadius: BorderRadius.circular(150),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: 250,
-                    child: const Text(
-                      'Ethan Carter',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 30,
-                    width: 250,
-                    child: const Text(
-                      'Software Engineer',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.blueGrey,
-                      ),
-                    ),
-                  )
-                ],
+        body: const ProfilePage(),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.add), label: "Add Item"),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Avatar
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.orange[100],
               ),
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: 400,
-                    height: 60,
-                    color: Colors.black12,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 10, right: 30),
-                          width: 40,
-                          height: 40,
-                          child: const Text('C'),
-                          decoration: BoxDecoration(
-                            color: Colors.black26,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          height: 40,
-                          width: 250,
-                          child: const Text(
-                            '+1 (555) 123-4567',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 400,
-                    height: 60,
-                    color: Colors.black12,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 10, right: 30),
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.black26,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Text('M'),
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          height: 40,
-                          width: 300,
-                          child: const Text(
-                            'ethan.carter@example.com',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+              child: ClipOval(
+                child: Image.asset("assets/image/my.jpg", fit: BoxFit.cover),
               ),
-            ],
-          ),
+            ),
+
+            const SizedBox(height: 16),
+
+            const Text(
+              'Ethan Carter',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              'Product Designer',
+              style: TextStyle(color: Colors.blueGrey, fontSize: 16),
+            ),
+            const Text(
+              'San Francisco, CA',
+              style: TextStyle(color: Colors.blueGrey, fontSize: 16),
+            ),
+
+            const SizedBox(height: 24),
+
+            // Skills
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Skills',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: [
+                SkillChip(label: 'UI/UX Design'),
+                SkillChip(label: 'User Research'),
+                SkillChip(label: 'Prototyping'),
+                SkillChip(label: 'Wireframing'),
+                SkillChip(label: 'Design Systems'),
+                SkillChip(label: 'Interaction Design'),
+              ],
+            ),
+
+            const SizedBox(height: 32),
+
+            // About
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'About',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'Ethan is a product designer with over 5 years of experience in creating user-centered designs. '
+              'He specializes in UI/UX design, user research, and prototyping. Ethan is passionate about solving '
+              'complex problems and creating intuitive and engaging user experiences.',
+              style:
+                  TextStyle(color: Colors.black87, fontSize: 16, height: 1.5),
+            ),
+
+            const SizedBox(height: 32),
+
+            // Contact
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Contact',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1F5F9),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.email_outlined, color: Colors.black),
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  'ethan.carter@email.com',
+                  style: TextStyle(fontSize: 16),
+                )
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1F5F9),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.call, color: Colors.black),
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  '(555) 123-4567',
+                  style: TextStyle(fontSize: 16),
+                )
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1F5F9),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.linked_camera, color: Colors.black),
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  'linkedin.com/in/ethancarter',
+                  style: TextStyle(fontSize: 16),
+                )
+              ],
+            ),
+            const SizedBox(height: 24),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SkillChip extends StatelessWidget {
+  final String label;
+
+  const SkillChip({super.key, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF1F5F9),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(
+          color: Colors.black87,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
