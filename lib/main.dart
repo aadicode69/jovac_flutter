@@ -1,224 +1,45 @@
+import 'package:firstproject/assignment_3/about.dart';
+import 'package:firstproject/assignment_3/contact_form.dart';
+import 'package:firstproject/assignment_3/home.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+void main(){
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int currentIndex = 0;
+  final List<Widget> _pages = const [
+    Center(child: Home()),
+    Center(child: About()),
+    Center(child: Contact()),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Profile Page",
+      title: "Assignment-3",
       home: Scaffold(
-        backgroundColor: const Color(0xFFF9FBFC),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFFE5E7EB),
-          title: const Text(
-            'Profile',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings, color: Colors.black),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        body: const ProfilePage(),
+        body: _pages[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.add), label: "Add Item"),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Avatar
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.orange[100],
-              ),
-              child: ClipOval(
-                child: Image.asset("assets/image/my.jpg", fit: BoxFit.cover),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            const Text(
-              'Ethan Carter',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              'Product Designer',
-              style: TextStyle(color: Colors.blueGrey, fontSize: 16),
-            ),
-            const Text(
-              'San Francisco, CA',
-              style: TextStyle(color: Colors.blueGrey, fontSize: 16),
-            ),
-
-            const SizedBox(height: 24),
-
-            // Skills
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Skills',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 12),
-            const Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                SkillChip(label: 'UI/UX Design'),
-                SkillChip(label: 'User Research'),
-                SkillChip(label: 'Prototyping'),
-                SkillChip(label: 'Wireframing'),
-                SkillChip(label: 'Design Systems'),
-                SkillChip(label: 'Interaction Design'),
-              ],
-            ),
-
-            const SizedBox(height: 32),
-
-            // About
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'About',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Ethan is a product designer with over 5 years of experience in creating user-centered designs. '
-              'He specializes in UI/UX design, user research, and prototyping. Ethan is passionate about solving '
-              'complex problems and creating intuitive and engaging user experiences.',
-              style:
-                  TextStyle(color: Colors.black87, fontSize: 16, height: 1.5),
-            ),
-
-            const SizedBox(height: 32),
-
-            // Contact
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Contact',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF1F5F9),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(Icons.email_outlined, color: Colors.black),
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  'ethan.carter@email.com',
-                  style: TextStyle(fontSize: 16),
-                )
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF1F5F9),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(Icons.call, color: Colors.black),
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  '(555) 123-4567',
-                  style: TextStyle(fontSize: 16),
-                )
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF1F5F9),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(Icons.linked_camera, color: Colors.black),
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  'linkedin.com/in/ethancarter',
-                  style: TextStyle(fontSize: 16),
-                )
-              ],
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SkillChip extends StatelessWidget {
-  final String label;
-
-  const SkillChip({super.key, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF1F5F9),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(
-          color: Colors.black87,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
+            currentIndex : currentIndex,
+            onTap: (value){
+              setState(() {
+                currentIndex=value;
+              });
+            },
+            items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home", tooltip: "Go to Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.info), label: "About", tooltip: "About"),
+          BottomNavigationBarItem(icon: Icon(Icons.mail), label: "Contact", tooltip: "Contact Us"),
+        ]),
       ),
     );
   }

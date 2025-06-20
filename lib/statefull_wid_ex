@@ -1,0 +1,66 @@
+import 'package:firstproject/counter.dart';
+import 'package:firstproject/profile_page.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int currentIndex = 0;
+
+  final List<Widget> _pages = [
+    Center(child: ProfilePage()),
+    Center(child: Counter()),
+    Center(child: Counter()),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Profile Page",
+      home: Scaffold(
+        backgroundColor: const Color(0xFFF9FBFC),
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFE5E7EB),
+          title: const Text(
+            'Profile',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings, color: Colors.black),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        body: _pages[currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (value) {
+            setState(() {
+              currentIndex = value;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home, color:Colors.black,), label: "Home", tooltip: "Go to Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.info, color:Colors.black,), label: "About", tooltip: "Search an item"),
+            BottomNavigationBarItem(icon: Icon(Icons.mail, color:Colors.black,), label: "Contact", tooltip: "Add an item"),
+          ],
+        ),
+      ),
+    );
+  }
+}
