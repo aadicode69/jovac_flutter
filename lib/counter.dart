@@ -32,19 +32,19 @@ class _CounterState extends State<Counter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Counter app'),
+        title: const Text('Counter app'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Hello Counter is',
               style: TextStyle(fontSize: 30, color: Colors.blueGrey),
             ),
             Text(
               '$counter',
-              style: TextStyle(fontSize: 20, color: Colors.blue),
+              style: const TextStyle(fontSize: 20, color: Colors.blue),
             ),
           ],
         ),
@@ -54,15 +54,15 @@ class _CounterState extends State<Counter> {
         children: [
           FloatingActionButton(
             onPressed: increment,
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           ),
           FloatingActionButton(
             onPressed: decrement,
-            child: Icon(Icons.remove),
+            child: const Icon(Icons.remove),
           ),
           FloatingActionButton(
             onPressed: reset,
-            child: Text('Reset'),
+            child: const Text('Reset'),
           ),
         ],
       ),

@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: const Text("App Highlights",
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22)),
             ),
